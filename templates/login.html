@@ -1,0 +1,42 @@
+{% extends 'default.html' %}
+
+{% block content %}
+  <div class="container-fluid h-custom v-75">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid"
+          alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 ">
+        <form action='/login/' method='post'>
+          <div class="form-outline mb-4">
+            <input type="text" id="login" name="login" class="form-control form-control-lg"
+              placeholder="Введите логин" />
+          </div>
+          <div class="form-outline mb-3">
+            <input type="password" id="password" name="password" class="form-control form-control-lg"
+              placeholder="Введите пароль" />
+          </div>
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Войти</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="wrapper fadeInDown">
+    <div id="formContent">
+  
+      <form action='/login/' method="post">
+        {% csrf_token %}
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+        <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+  
+    </div>
+  </div> -->
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% block navbar %}
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">ИТМО.Доклад</a>
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/schedule/">Расписание</a>
+                </li>
+              {% endif %}
+              <!-- <li>
+                <a class="nav-link" href="/about/">О системе</a>  
+              </li> -->
+            </ul>
+        <form class="d-flex">
+            {% if user.is_authenticated %}
+                <button type="button" class="btn btn-primary" onclick="window.location.replace(window.location.origin + '/logout/');">Выйти</button>
+            {% else %}
+                <button type="button" class="btn btn-primary" onclick="window.location.replace(window.location.origin + '/login/');">Войти</button>
+            {% endif %}
+        </form>
+      </div>
+    </div>
+  </nav>
+
+{% endblock %}
+
+<!-- <div class="container">
+    <div class="container-fluid">
+        <div class="row bg-light">
+            <div class="col-8">
+                <a href="/"><h4>ITMO.Доклады</h4></a>
+            </div>
+            {% if user.is_authenticated %}
+                <div class="col-2">
+                    <a href="/schedule/"><h5>Расписание</h5></a>
+                </div>
+            {% endif %}
+            <div class="col-2">
+                {% if user.is_authenticated %}
+                    <button type="button" class="btn btn-primary" onclick="window.location.replace(window.location.origin + '/logout/');">Log out</button>
+                {% else %}
+                    <button type="button" class="btn btn-primary" onclick="window.location.replace(window.location.origin + '/login/');">Log in</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div> -->

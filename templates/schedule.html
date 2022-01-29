@@ -1,0 +1,59 @@
+{% extends 'default.html' %}
+
+{% block content %}
+
+<h3>Welcome, {{ fullname }}</h3>
+<h4>Your group: {{ student_group }}</h4>
+
+<div class="container">
+    <h4>Следующие занятия:</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Дисциплина</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Время начала</th>
+                <th scope="col">Время окончания</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in next_lessons %}
+                <tr scope="row">
+                    <th>
+                        <a href="/lesson/{{o.pk}}">{{ o.discipline_id.name }}</a>
+                    </th>
+                    <th>{{ o.date }}</th>
+                    <th>{{ o.start_time }}</th>
+                    <th>{{ o.end_time }}</th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h4>Прошедшие занятия:</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Дисциплина</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Время начала</th>
+                <th scope="col">Время окончания</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in previous_lessons %}
+                <tr scope="row">
+                    <th>
+                        <a href="/lesson/{{o.pk}}">{{ o.discipline_id.name }}</a>
+                    </th>
+                    <th>{{ o.date }}</th>
+                    <th>{{ o.start_time }}</th>
+                    <th>{{ o.end_time }}</th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

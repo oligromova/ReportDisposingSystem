@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body, html: {
+            height: 100vh;
+        }
+    </style>
+    <link 
+        rel="stylesheet"
+        type="text/css"
+        href="{% static 'css/bootstrap.css' %}"
+    />
+    <meta charset="utf-8" />
+    <title>Django app</title>
+</head>
+<body>
+    {% block default %}{% endblock %}
+</body>
+</html>

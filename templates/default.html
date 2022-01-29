@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block default %}
+{% include 'navbar.html' %}
+<div class="fullheight-div">
+    {% block content%}{% endblock content %}
+</div>
+
+<style>
+    .fullheight-div {
+        height: 85vh;
+    }
+</style>
+
+{% include 'footer.html' %}
+{% endblock %}

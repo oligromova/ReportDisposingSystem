@@ -1,0 +1,78 @@
+{% extends 'default.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div>Занятие {{ lesson.date }} по дисциплине <b>{{ lesson.discipline_id.name }}</b></div>
+
+    <div>Время начала: {{ lesson.start_time }}</div>
+    <div>Время окончания: {{ lesson.end_time }}</div>
+</div>
+
+<script>
+    function onAssignClick(topic_id) {
+        if (!confirm('Вы уверены, что хотите записаться?'))
+            return;
+
+        const http = new XMLHttpRequest()
+        http.open('POST', `${window.location.protocol}//${window.location.host}/assign/${topic_id}/`)
+        http.setRequestHeader('Content-type', 'application/json')
+        http.onload = window.location.reload.bind(window.location)
+        http.send()
+    }
+
+    function onDeassignClick(topic_id) {
+        if (!confirm('Вы уверены, что хотите отписаться?'))
+            return;
+        console.log('Deleting...')
+
+        const http = new XMLHttpRequest()
+        http.open('DELETE', `${window.location.protocol}//${window.location.host}/deassign/${topic_id}/`)
+        http.setRequestHeader('Content-type', 'application/json')
+        http.onload = window.location.reload.bind(window.location)
+        http.send()
+    }
+</script>
+
+<div class="container-fluid">
+    {% if topic_assigned %}
+        <h3>Выбранный Вами доклад на пару: {{ assigned_topic.lessontopic_id.topic_id.title }}</h3>
+        {% if lesson_passed %}
+            {% if assigned_topic.submitted %}
+                <h5>Зачет: {{ credit }}</h5>
+            {% else %}
+                <h5>Ваш преподаватель еще не выставил отметку за выступление</h5>
+            {% endif %}
+            <h6></h6>
+        {% else %}
+            <button type="button" onclick="onDeassignClick({{ assigned_topic.pk }})">Отменить запись</button>
+        {% endif %}
+    {% else %}
+        {% if lesson_passed %}
+            <h6>Запись на доклад невозможна</h6>
+        {% else %}
+            <h3>Доступные доклады</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Список доступных докладов</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for topic in topics %}
+                        <tr>
+                            <th>{{ topic.topic_id.title }}</th>
+                            <th>
+                                <button type=button onclick="onAssignClick({{ topic.pk }})">Выбрать</button>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>        
+        {% endif %}
+    {% endif %}
+</div>
+
+
+
+{% endblock %}
